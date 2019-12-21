@@ -17,6 +17,7 @@ from datetime import datetime
 
 
 PORT = 8
+led = 4
 motion = 0
 camera = PiCamera()
 
@@ -33,6 +34,7 @@ while True:
         motion=digitalRead(PORT)
         # check whether any movement is detected within the target range
         if motion == 1:
+            digitalWrite(led,0)
             #ask for url to send a message to telegram chat
             req = requests.get(URL)
             print('Motion Detected')
@@ -48,7 +50,8 @@ while True:
             camera.stop_recording()
 
         else:
-            print('Surface clear')
+            print('Clear')
+            digitalWrite(led,1)
         # time laps between next movement checking
         time.sleep(3)
         
