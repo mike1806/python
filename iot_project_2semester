@@ -13,7 +13,6 @@ import grovepi
 
 PORT = 8
 motion = 0
-grovepi.pinMode(PORT,"INPUT")
 
 BOT_ID = '827686452:AAG5aeN-I1GdBWDOAggMTZS65iJJthm0pNU'
 CHAT_ID = '-1001251595992'
@@ -22,7 +21,7 @@ URL = 'https://api.telegram.org/bot{}/sendMessage?chat_id={}&text={}'.format(BOT
 
 while True:
     try:
-        motion=grove.pi.digitalRead(PORT)
+        motion=digitalRead(PORT)
         # Sense motion, usually human, within the target range
         if motion == 1:
             print('Motion Detected')
