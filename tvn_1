@@ -9,6 +9,77 @@ import socketserver
 from threading import Condition
 from http import server
 
+import time
+import requests
+from grovepi import *
+from picamera import *
+from datetime import datetime
+  
+#Michal Borkowski
+#IoT Project Software Development
+#student no 17164532
+#Dublin_20.12.2019
+
+# raspberryPi + GrovePi hat + cameraPi sensor + PIR motion grovePi sensor 
+
+
+# Connect the Grove PIR motion sensor to digital port D8
+
+# SIG,NC,VCC,GND
+
+
+PORT = 8
+led = 4
+motion = 0
+camera = PiCamera()
+
+#create a BOT for telegram messenger to receive notifications
+BOT_ID = '827686452:AAG5aeN-I1GdBWDOAggMTZS65iJJthm0pNU'
+CHAT_ID = '-1001251595992'
+#message output
+MSG = 'Warning! Movement in area detected!'
+#url to provide address information to connection
+URL = 'https://api.telegram.org/bot{}/sendMessage?chat_id={}&text={}'.format(BOT_ID, CHAT_ID, MSG)
+
+while True:
+    try:
+        motion=digitalRead(PORT)
+        # check whether any movement is detected within the target range
+        if motion == 1:
+            digitalWrite(led,0)
+            #ask for url to send a message to telegram chat
+            req = requests.get(URL)
+            print('Motion Detected')
+            # create time stamp
+            now = (datetime.now())
+            tstamp = "{0:%Y}-{0:%m}-{0:%d}_{0:%H}.{0:%M}.{0:%S}".format(now)
+
+            #create file name with tstamp
+            filename = tstamp + ".h264"  
+    
+            print (filename)
+            camera.start_recording(filename)
+            camera.stop_recording()
+
+        else:
+            print('Clear')
+            digitalWrite(led,1)
+        # time laps between next movement checking
+        time.sleep(3)
+        
+    #handling exceptions
+    except IOError:
+
+        print("Error")
+
+    except TypeError:
+
+        print("Error")
+
+    except KeyboardInterrupt:
+
+        exit()
+
 PAGE="""\
 <html>
 <head>
@@ -84,7 +155,7 @@ class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
 with picamera.PiCamera(resolution='640x480', framerate=24) as camera:
     output = StreamingOutput()
     #Uncomment the next line to change your Pi's Camera rotation (in degrees)
-    #camera.rotation = 90
+    camera.rotation = 90
     camera.start_recording(output, format='mjpeg')
     try:
         address = ('', 8000)
