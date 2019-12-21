@@ -13,7 +13,7 @@ from picamera import PiCamera
 # SIG,NC,VCC,GND
 
 
-PORT = 8
+PORT = 7
 motion = 0
 
 
