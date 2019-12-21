@@ -1,15 +1,16 @@
-# GrovePi + Grove Ultrasonic Ranger
+#Michal Borkowski
+#IoT Project Software Development
+#20.12.2019
+
+# raspberryPi + GrovePi hat + cameraPi sensor + PIR motion grovePi sensor 
 
 import time
-
 import requests
-
 from grovepi import *
-
 from picamera import *
 from datetime import datetime
 
-# Connect the Grove Ultrasonic Ranger to digital port D4
+# Connect the Grove PIR motion sensor to digital port D8
 
 # SIG,NC,VCC,GND
 
@@ -18,16 +19,20 @@ PORT = 8
 motion = 0
 camera = PiCamera()
 
+#create a BOT for telegram messenger to receive notifications
 BOT_ID = '827686452:AAG5aeN-I1GdBWDOAggMTZS65iJJthm0pNU'
 CHAT_ID = '-1001251595992'
-MSG = 'Movement in area detected check the stream for veryfication'
+#message output
+MSG = 'Warning! Movement in area detected!'
+#url to provide address information to connection
 URL = 'https://api.telegram.org/bot{}/sendMessage?chat_id={}&text={}'.format(BOT_ID, CHAT_ID, MSG)
 
 while True:
     try:
         motion=digitalRead(PORT)
-        # Sense motion, usually human, within the target range
+        # check whether any movement is detected within the target range
         if motion == 1:
+            #ask for url to send a message to telegram chat
             req = requests.get(URL)
             print('Motion Detected')
             # create time stamp
@@ -43,9 +48,9 @@ while True:
 
         else:
             print('Surface clear')
-        # if your hold time is less than this, you might not see as many detections
+        # time laps between next movement checking
         time.sleep(1)
-
+    #handling exceptions
     except IOError:
 
         print("Error")
