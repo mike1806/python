@@ -24,6 +24,7 @@ URL = 'https://api.telegram.org/bot{}/sendMessage?chat_id={}&text={}'.format(BOT
 
 while True:
     try:
+        motion=digitalRead(PORT)
         # Sense motion, usually human, within the target range
         if motion == 1:
             print('Motion Detected')
