@@ -34,9 +34,9 @@ while True:
             print('Motion Detected')
             filename = "{0:%Y}-{0:%m}-{0:%d}".format(now)
             camera.start_recording(filename)
-            camera.stop_recording()
         else:
             print('Surface clear')
+            camera.stop_recording()
         # if your hold time is less than this, you might not see as many detections
         time.sleep(1)
 
