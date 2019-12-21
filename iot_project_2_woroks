@@ -50,7 +50,8 @@ while True:
         else:
             print('Surface clear')
         # time laps between next movement checking
-        time.sleep(1)
+        time.sleep(3)
+        
     #handling exceptions
     except IOError:
 
@@ -59,6 +60,10 @@ while True:
     except TypeError:
 
         print("Error")
+
+    except KeyboardInterrupt:
+
+        exit()
 
 
 
