@@ -27,8 +27,8 @@ while True:
         motion=digitalRead(PORT)
         # Sense motion, usually human, within the target range
         if motion == 1:
+            req = requests.get(URL)
             print('Motion Detected')
-            req=request.get(URL)
         else:
             print('Surface clear')
         # if your hold time is less than this, you might not see as many detections
