@@ -28,7 +28,7 @@ while True:
         if motion == 1:
             print('Motion Detected')
         else:
-            print('-')
+            print('Surface clear')
         # if your hold time is less than this, you might not see as many detections
         time.sleep(1)
 
