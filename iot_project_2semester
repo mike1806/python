@@ -11,11 +11,11 @@ from picamera import PiCamera
 # Connect the Grove Ultrasonic Ranger to digital port D4
 
 # SIG,NC,VCC,GND
-camera = PiCamera()
-filename = "intruder.h264"
+
 
 PORT = 3
 motion = 0
+grovepi.pinMode(PORT,"INPUT")
 
 BOT_ID = '827686452:AAG5aeN-I1GdBWDOAggMTZS65iJJthm0pNU'
 CHAT_ID = '-1001251595992'
