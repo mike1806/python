@@ -41,7 +41,6 @@ while True:
             camera.start_recording(filename)
         else:
             print('Surface clear')
-            camera.stop_recording()
         # if your hold time is less than this, you might not see as many detections
         time.sleep(1)
 
