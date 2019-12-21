@@ -17,7 +17,6 @@ from datetime import datetime
 PORT = 8
 motion = 0
 camera = PiCamera()
-filename = "intruder.h264"
 
 BOT_ID = '827686452:AAG5aeN-I1GdBWDOAggMTZS65iJJthm0pNU'
 CHAT_ID = '-1001251595992'
@@ -31,6 +30,14 @@ while True:
         if motion == 1:
             req = requests.get(URL)
             print('Motion Detected')
+            # create time stamp
+            now = (datetime.now())
+            tstamp = "{0:%Y}-{0:%m}-{0:%d}_{0:%H}.{0:%M}.{0:%S}".format(now)
+
+            #create file name with tstamp
+            filename = tstamp + "_taylor.h264"  
+    
+            print (filename)
             camera.start_recording(filename)
         else:
             print('Surface clear')
