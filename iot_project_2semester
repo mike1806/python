@@ -14,24 +14,26 @@ from picamera import PiCamera
 camera = PiCamera()
 filename = "intruder.h264"
 
-PORT = 4
+PORT = 3
+motion = 0
 
 BOT_ID = '827686452:AAG5aeN-I1GdBWDOAggMTZS65iJJthm0pNU'
 CHAT_ID = '-1001251595992'
-MSG = 'Sensor has been triggered'
+MSG = 'Movement in area detected check the stream for veryfication'
 URL = 'https://api.telegram.org/bot{}/sendMessage?chat_id={}&text={}'.format(BOT_ID, CHAT_ID, MSG)
 
 while True:
-
     try:
-        # Read distance value from Ultrasonic
-        reading = ultrasonicRead(PORT)
-        print(reading)
-        if reading <= 150:
-            req = requests.get(URL)
-            camera.start_preview()
-            camera.stop_preview()
-        time.sleep(1)
+    # Sense motion, usually human, within the target range
+		motion=grovepi.digitalRead(PORT)
+		if motion==0 or motion==1:	# check if reads were 0 or 1 it can be 255 also because of IO Errors so remove those values
+			if motion==1:
+				print ('Motion Detected')
+			else:
+				print ('-')
+
+			# if your hold time is less than this, you might not see as many detections
+		time.sleep(.2)
 
 
 except TypeError:
