@@ -26,18 +26,18 @@ while True:
 	try:
 		# Sense motion, usually human, within the target range
 		motion=grovepi.digitalRead(PORT)
-		if motion==1:	
-			if motion==1:
-				print ('Motion Detected')
-			else:
-				print ('-')
+		if motion==1:
+			print ('Motion Detected')
+		else:
+			print ('-')
 
 			# if your hold time is less than this, you might not see as many detections
 		time.sleep(.2)
-except TypeError:
-
-        print("Error")
+        
+    except TypeError:
+    
+    	print("Error")
 
     except IOError:
 
-        print("Error")
+    	print("Error")
