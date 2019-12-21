@@ -6,7 +6,8 @@ import requests
 
 from grovepi import *
 
-from picamera import PiCamera
+from picamera import Picamera
+from datetime import datetime
 
 # Connect the Grove Ultrasonic Ranger to digital port D4
 
@@ -15,6 +16,8 @@ from picamera import PiCamera
 
 PORT = 8
 motion = 0
+camera = PiCamera()
+filename = "{0:%Y}-{0:%m}-{0:%d}".format(now)
 
 
 BOT_ID = '827686452:AAG5aeN-I1GdBWDOAggMTZS65iJJthm0pNU'
@@ -29,6 +32,9 @@ while True:
         if motion == 1:
             req = requests.get(URL)
             print('Motion Detected')
+            filename = "{0:%Y}-{0:%m}-{0:%d}".format(now)
+            camera.start_recording(filename)
+            camera.stop_recording()
         else:
             print('Surface clear')
         # if your hold time is less than this, you might not see as many detections
