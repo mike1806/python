@@ -15,7 +15,6 @@ from picamera import PiCamera
 
 PORT = 3
 motion = 0
-grovepi.pinMode(PORT,"INPUT")
 
 
 BOT_ID = '827686452:AAG5aeN-I1GdBWDOAggMTZS65iJJthm0pNU'
