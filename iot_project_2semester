@@ -4,18 +4,16 @@ import time
 
 import requests
 
-from grovepi import *
-
-from picamera import PiCamera
+import grovepi
 
 # Connect the Grove Ultrasonic Ranger to digital port D4
 
 # SIG,NC,VCC,GND
 
 
-PORT = 7
+PORT = 8
 motion = 0
-
+grovepi.pinMode(PORT,"INPUT")
 
 BOT_ID = '827686452:AAG5aeN-I1GdBWDOAggMTZS65iJJthm0pNU'
 CHAT_ID = '-1001251595992'
@@ -24,10 +22,11 @@ URL = 'https://api.telegram.org/bot{}/sendMessage?chat_id={}&text={}'.format(BOT
 
 while True:
     try:
-        motion=digitalRead(PORT)
+        motion=grove.pi.digitalRead(PORT)
         # Sense motion, usually human, within the target range
         if motion == 1:
             print('Motion Detected')
+            req=request.get(URL)
         else:
             print('Surface clear')
         # if your hold time is less than this, you might not see as many detections
