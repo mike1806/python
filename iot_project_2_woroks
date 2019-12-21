@@ -4,7 +4,9 @@ import time
 
 import requests
 
-import grovepi
+from grovepi import *
+
+from picamera import PiCamera
 
 # Connect the Grove Ultrasonic Ranger to digital port D4
 
@@ -13,6 +15,7 @@ import grovepi
 
 PORT = 8
 motion = 0
+
 
 BOT_ID = '827686452:AAG5aeN-I1GdBWDOAggMTZS65iJJthm0pNU'
 CHAT_ID = '-1001251595992'
@@ -38,5 +41,6 @@ while True:
     except TypeError:
 
         print("Error")
+
 
 
