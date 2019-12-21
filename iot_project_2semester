@@ -26,7 +26,7 @@ while True:
     try:
     # Sense motion, usually human, within the target range
 		motion=grovepi.digitalRead(PORT)
-		if motion==0 or motion==1:	# check if reads were 0 or 1 it can be 255 also because of IO Errors so remove those values
+		if motion==1:	# check if reads were 0 or 1 it can be 255 also because of IO Errors so remove those values
 			if motion==1:
 				print ('Motion Detected')
 			else:
