@@ -35,10 +35,12 @@ while True:
             tstamp = "{0:%Y}-{0:%m}-{0:%d}_{0:%H}.{0:%M}.{0:%S}".format(now)
 
             #create file name with tstamp
-            filename = tstamp + "_taylor.h264"  
+            filename = tstamp + ".h264"  
     
             print (filename)
             camera.start_recording(filename)
+            camera.stop_recording()
+
         else:
             print('Surface clear')
         # if your hold time is less than this, you might not see as many detections
