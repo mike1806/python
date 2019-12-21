@@ -17,7 +17,6 @@ from datetime import datetime
 PORT = 8
 motion = 0
 camera = PiCamera()
-filename = "{0:%Y}-{0:%m}-{0:%d}".format(now)
 
 
 BOT_ID = '827686452:AAG5aeN-I1GdBWDOAggMTZS65iJJthm0pNU'
