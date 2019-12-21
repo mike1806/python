@@ -23,10 +23,10 @@ MSG = 'Movement in area detected check the stream for veryfication'
 URL = 'https://api.telegram.org/bot{}/sendMessage?chat_id={}&text={}'.format(BOT_ID, CHAT_ID, MSG)
 
 while True:
-    try:
-    # Sense motion, usually human, within the target range
+	try:
+		# Sense motion, usually human, within the target range
 		motion=grovepi.digitalRead(PORT)
-		if motion==1:	# check if reads were 0 or 1 it can be 255 also because of IO Errors so remove those values
+		if motion==1:	
 			if motion==1:
 				print ('Motion Detected')
 			else:
@@ -34,8 +34,6 @@ while True:
 
 			# if your hold time is less than this, you might not see as many detections
 		time.sleep(.2)
-
-
 except TypeError:
 
         print("Error")
