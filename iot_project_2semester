@@ -13,7 +13,7 @@ from picamera import PiCamera
 # SIG,NC,VCC,GND
 
 
-PORT = 3
+PORT = 4
 motion = 0
 
 
@@ -30,7 +30,7 @@ while True:
         else:
             print('-')
         # if your hold time is less than this, you might not see as many detections
-        time.sleep(.2)
+        time.sleep(1)
 
     except IOError:
 
