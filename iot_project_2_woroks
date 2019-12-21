@@ -6,7 +6,7 @@ import requests
 
 from grovepi import *
 
-from picamera import Picamera
+import picamera 
 from datetime import datetime
 
 # Connect the Grove Ultrasonic Ranger to digital port D4
