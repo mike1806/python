@@ -29,13 +29,11 @@ motion = 0
 camera = PiCamera()
 #to adjust correctly to hardware position
 camera.rotation = 180
+# The threshold to turn the led on 400.00 * 5 / 1024 = 1.95v
+threshold_value = 400
 
 pinMode(sound_sensor,"INPUT")
 pinMode(led,"OUTPUT")
-
-# The threshold to turn the led on 400.00 * 5 / 1024 = 1.95v
-threshold_value = 400
-print("Sound ready")
 
 #create a BOT for telegram messenger to receive notifications
 BOT_ID = '827686452:AAG5aeN-I1GdBWDOAggMTZS65iJJthm0pNU'
