@@ -98,7 +98,7 @@ while True:
         exit()
      
     finally:
-    camera.close()
+        camera.close()
 
 
 
