@@ -20,6 +20,7 @@ PORT = 8
 led = 4
 motion = 0
 camera = PiCamera()
+#to adjust correctly to hardware position
 camera.rotation = 180
 
 #create a BOT for telegram messenger to receive notifications
