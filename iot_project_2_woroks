@@ -15,6 +15,13 @@ from datetime import datetime
 
 # SIG,NC,VCC,GND
 
+ # Connect the Grove Sound Sensor to analog port A0
+# SIG,NC,VCC,GND
+sound_sensor = 0
+
+# Connect the Grove LED to digital port D5
+# SIG,NC,VCC,GND
+led = 5
 
 PORT = 8
 led = 4
@@ -70,13 +77,7 @@ while True:
 
         exit()
         
- # Connect the Grove Sound Sensor to analog port A0
-# SIG,NC,VCC,GND
-sound_sensor = 0
 
-# Connect the Grove LED to digital port D5
-# SIG,NC,VCC,GND
-led = 5
 
 grovepi.pinMode(sound_sensor,"INPUT")
 grovepi.pinMode(led,"OUTPUT")
