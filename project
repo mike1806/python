@@ -1,0 +1,106 @@
+#Michal Borkowski
+#IoT Project Software Development
+#student no 17164532
+#Dublin_20.12.2019
+
+# raspberryPi + GrovePi hat + cameraPi sensor + PIR motion grovePi sensor 
+
+import time
+import requests
+from grovepi import *
+from picamera import *
+from datetime import datetime
+
+# Connect the Grove PIR motion sensor to digital port D8
+
+# SIG,NC,VCC,GND
+
+ # Connect the Grove Sound Sensor to analog port A0
+# SIG,NC,VCC,GND
+sound_sensor = 0
+
+# Connect the Grove LED to digital port D5
+# SIG,NC,VCC,GND
+led = 5
+
+PORT = 8
+led = 4
+motion = 0
+camera = PiCamera()
+#to adjust correctly to hardware position
+camera.rotation = 180
+
+pinMode(sound_sensor,"INPUT")
+pinMode(led,"OUTPUT")
+
+#create a BOT for telegram messenger to receive notifications
+BOT_ID = '827686452:AAG5aeN-I1GdBWDOAggMTZS65iJJthm0pNU'
+CHAT_ID = '-1001251595992'
+#message output
+MSG = 'Warning! Movement or sound in area detected!'
+#url to provide address information to connection
+URL = 'https://api.telegram.org/bot{}/sendMessage?chat_id={}&text={}'.format(BOT_ID, CHAT_ID, MSG)
+# The threshold to turn the led on 450.00 * 5 / 1024 = 1.95v
+threshold_value = 450
+
+while True:
+    try:
+        # Read the sound level
+        sensor_value = analogRead(sound_sensor)
+
+        # If loud, illuminate LED, otherwise dim
+        if sensor_value > threshold_value:
+            digitalWrite(led,1)
+            time.sleep(.1)
+            digitalWrite(led,0)
+            
+            
+            digitalWrite(led,0)
+            time.sleep(.1)
+            digitalWrite(led,1)
+            req = requests.get(URL)
+        else:
+            digitalWrite(led,0)
+            
+        print("sensor_value = %d" %sensor_value)
+      
+        time.sleep(.5)
+      
+        motion=digitalRead(PORT)
+        # check whether any movement is detected within the target range
+        if motion == 1:
+            #ask for url to send a message to telegram chat
+            req = requests.get(URL)
+            print('Motion Detected')
+            # create time stamp
+            now = (datetime.now())
+            tstamp = "{0:%Y}-{0:%m}-{0:%d}_{0:%H}.{0:%M}.{0:%S}".format(now)
+
+            #create file name with time stamp 
+            filename = tstamp + "_taylor.h264"
+    
+            print (filename)
+            camera.start_preview()
+            camera.start_recording(filename)
+            time.sleep(4)
+            camera.stop_recording()
+            camera.stop_preview()
+
+        else:
+            print('Clear')
+        # time laps between next movement checking
+        time.sleep(1)
+            
+        
+    #handling exceptions
+    except IOError:
+
+        print("Error")
+
+    except TypeError:
+
+        print("Error")
+
+    except KeyboardInterrupt:
+
+        exit()
