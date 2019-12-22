@@ -29,8 +29,6 @@ motion = 0
 camera = PiCamera()
 #to adjust correctly to hardware position
 camera.rotation = 180
-# The threshold to turn the led on 350.00 * 5 / 1024 = 1.95v
-threshold_value = 350
 
 pinMode(sound_sensor,"INPUT")
 pinMode(led,"OUTPUT")
@@ -42,6 +40,8 @@ CHAT_ID = '-1001251595992'
 MSG = 'Warning! Movement or sound in area detected!'
 #url to provide address information to connection
 URL = 'https://api.telegram.org/bot{}/sendMessage?chat_id={}&text={}'.format(BOT_ID, CHAT_ID, MSG)
+# The threshold to turn the led on 450.00 * 5 / 1024 = 1.95v
+threshold_value = 450
 
 while True:
     try:
@@ -51,9 +51,17 @@ while True:
         # If loud, illuminate LED, otherwise dim
         if sensor_value > threshold_value:
             digitalWrite(led,1)
+            time.sleep(.1)
+            digitalWrite(led,0)
+            
+            
+            digitalWrite(led,0)
+            time.sleep(.1)
+            digitalWrite(led,1)
             req = requests.get(URL)
         else:
             digitalWrite(led,0)
+            
         print("sensor_value = %d" %sensor_value)
       
         time.sleep(.5)
@@ -74,7 +82,7 @@ while True:
             print (filename)
             camera.start_preview()
             camera.start_recording(filename)
-            time.sleep(5)
+            time.sleep(4)
             camera.stop_recording()
             camera.stop_preview()
 
