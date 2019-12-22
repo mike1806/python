@@ -24,7 +24,6 @@ sound_sensor = 0
 led = 5
 
 PORT = 8
-led = 4
 motion = 0
 camera = PiCamera()
 #to adjust correctly to hardware position
