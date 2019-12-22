@@ -35,7 +35,7 @@ pinMode(led,"OUTPUT")
 
 # The threshold to turn the led on 400.00 * 5 / 1024 = 1.95v
 threshold_value = 400
-print("mikeiot")
+print("Sound ready")
 
 #create a BOT for telegram messenger to receive notifications
 BOT_ID = '827686452:AAG5aeN-I1GdBWDOAggMTZS65iJJthm0pNU'
@@ -50,7 +50,6 @@ while True:
         motion=digitalRead(PORT)
         # check whether any movement is detected within the target range
         if motion == 1:
-            digitalWrite(led,0)
             #ask for url to send a message to telegram chat
             req = requests.get(URL)
             print('Motion Detected')
@@ -59,7 +58,7 @@ while True:
             tstamp = "{0:%Y}-{0:%m}-{0:%d}_{0:%H}.{0:%M}.{0:%S}".format(now)
 
             #create file name with tstamp
-            filename = tstamp + "_iOt.h264"  
+            filename = tstamp + "_tyson.h264"  
     
             print (filename)
             camera.start_recording(filename)
@@ -67,12 +66,11 @@ while True:
 
         else:
             print('Clear')
-            digitalWrite(led,1)
         # time laps between next movement checking
         time.sleep(1)
         
         # Read the sound level
-        sensor_value = grovepi.analogRead(sound_sensor)
+        sensor_value = analogRead(sound_sensor)
 
         # If loud, illuminate LED, otherwise dim
         if sensor_value > threshold_value:
