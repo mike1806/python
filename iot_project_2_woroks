@@ -20,6 +20,7 @@ PORT = 8
 led = 4
 motion = 0
 camera = PiCamera()
+camera.rotation = 180
 
 #create a BOT for telegram messenger to receive notifications
 BOT_ID = '827686452:AAG5aeN-I1GdBWDOAggMTZS65iJJthm0pNU'
@@ -53,7 +54,7 @@ while True:
             print('Clear')
             digitalWrite(led,1)
         # time laps between next movement checking
-        time.sleep(2)
+        time.sleep(1)
         
     #handling exceptions
     except IOError:
