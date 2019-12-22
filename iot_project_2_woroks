@@ -96,9 +96,6 @@ while True:
     except KeyboardInterrupt:
 
         exit()
-     
-    finally:
-        camera.close()
 
 
 
