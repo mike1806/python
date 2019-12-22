@@ -106,7 +106,19 @@ while True:
 
 
 """
-        
+ //to LCD 3.5"
+
+sudo rm -rf LCD-show 
+git clone https://github.com/goodtft/LCD-show.git
+chmod -R 755 LCD-show 
+cd LCD-show/
+sudo ./LCD35-show
+
+//to main screen
+
+chmod -R 755 LCD-show 
+cd LCD-show/ 
+sudo ./LCD-hdmi       
 """
 
 
