@@ -41,7 +41,7 @@ print("Sound ready")
 BOT_ID = '827686452:AAG5aeN-I1GdBWDOAggMTZS65iJJthm0pNU'
 CHAT_ID = '-1001251595992'
 #message output
-MSG = 'Warning! Movement in area detected!'
+MSG = 'Warning! Movement or sound in area detected!'
 #url to provide address information to connection
 URL = 'https://api.telegram.org/bot{}/sendMessage?chat_id={}&text={}'.format(BOT_ID, CHAT_ID, MSG)
 
@@ -57,12 +57,15 @@ while True:
             now = (datetime.now())
             tstamp = "{0:%Y}-{0:%m}-{0:%d}_{0:%H}.{0:%M}.{0:%S}".format(now)
 
-            #create file name with tstamp
-            filename = tstamp + "_tyson.h264"  
+            #create file name with time stamp 
+            filename = tstamp + "_taylor.h264""  
     
             print (filename)
+            camera.start_preview()
             camera.start_recording(filename)
+            sleep(5)
             camera.stop_recording()
+            camera.stop_preview()
 
         else:
             print('Clear')
@@ -75,8 +78,11 @@ while True:
         # If loud, illuminate LED, otherwise dim
         if sensor_value > threshold_value:
             digitalWrite(led,1)
+            req = requests.get(URL)
+
         else:
             digitalWrite(led,0)
+            
 
         print("sensor_value = %d" %sensor_value)
         time.sleep(.5)
