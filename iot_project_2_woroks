@@ -56,7 +56,7 @@ while True:
             digitalWrite(led,0)
         print("sensor_value = %d" %sensor_value)
       
-      time.sleep(.5)
+        time.sleep(.5)
       
         motion=digitalRead(PORT)
         # check whether any movement is detected within the target range
